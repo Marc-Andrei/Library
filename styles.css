@@ -13,3 +13,27 @@ th {
     border: 1px solid black;
 }
 */
+
+.table {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    grid-template-rows: auto;
+    
+}
+
+tr {
+    height: 22px;
+}
+
+.delete {
+    box-sizing: border-box;
+    height: 22px;
+    padding: 1px;
+}
+
+
+
+.delButtons {
+    padding-top: 22px;
+
+}
