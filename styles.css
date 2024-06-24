@@ -16,24 +16,34 @@ th {
 
 .table {
     display: grid;
-    grid-template-columns: min-content min-content;
+    grid-template-columns: min-content min-content min-content;
     grid-template-rows: auto;
     
 }
 
 tr {
-    height: 22px;
+    height: 43px;
 }
 
 .delete {
     box-sizing: border-box;
-    height: 22px;
+    height: 43px;
     padding: 1px;
 }
 
 
 
 .delButtons {
-    padding-top: 22px;
+    padding-top: 43px;
 
+}
+
+.readButtons {
+    padding-top: 43px;
+}
+
+.read {
+    height: 43px;
+    padding: 1px;
+    
 }

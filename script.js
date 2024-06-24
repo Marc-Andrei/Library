@@ -5,18 +5,25 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-
-function addBookToLibrary() {
-
+Book.prototype.readToggle = function () {
+    if(this.read=="yes") {
+        this.read = "no";
+    }
+    else {
+        this.read = "yes";
+    }
 }
+
 
 function addBook(book) {
     const newTr = document.createElement('tr');
     newTr.class = "Tr";
     for (property in book) {
+        if (book.hasOwnProperty(property)) {
         const newTd = document.createElement('td');
         newTd.textContent = book[property];
         newTr.appendChild(newTd);
+        }
     }
     body.appendChild(newTr);
 }
@@ -34,28 +41,35 @@ function clearTable() {
 }
 
 function createRemoveButtons() {
-    /*const rem = document.createElement("button");
-    rem.class = "delete";
-    rem.textContent = "Delete";
-    rem.id = body.children.length - 1;
-    console.log(rem.id);
-    rem.appendChild
-    rem.addEventListener ("click" () => {
-*/
     while (delButtons.children.length>0) {
         delButtons.removeChild(delButtons.children[0]);
 }
+    while (readButtons.children.length>0) {
+        readButtons.removeChild(readButtons.children[0]);
+    }
     for (let i=0; i < myLibrary.length; i++) {
         const rem = document.createElement("button");
+        const read = document.createElement("button");
         rem.className = "delete";
+        read.className = "read";
         rem.textContent = "Delete";
+        read.textContent = "Read Toggle";
         rem.id = `${i}`;
+        read.count = `${i}`;
         rem.addEventListener("click", (event) => {
             myLibrary.splice(event.target.id, 1);
             clearTable();
             updateTable(myLibrary);
             createRemoveButtons();
         } )
+
+        read.addEventListener("click", (event) => {
+            myLibrary[event.target.count].readToggle();
+            clearTable();
+            updateTable(myLibrary);
+            createRemoveButtons();
+        })
+        readButtons.appendChild(read);
 
         delButtons.appendChild(rem);
 
@@ -64,15 +78,12 @@ function createRemoveButtons() {
     }
     }
 
-const hobbit = new Book("The Hobbit", "J.R.R. Tolkien", "295 pages", "not read yet");
-const deepWork = new Book("Deep Work", "Cal Newport", "230", "reading");
-const ess = new Book("ess", "Cal Newport", "230", "reading");
 
-const library = [hobbit, deepWork, ess];
 const myLibrary = [];
 
 const tableDiv = document.querySelector(".table") 
 const delButtons = document.querySelector(".delButtons")
+const readButtons = document.querySelector(".readButtons")
 const body = document.querySelector('tbody');
 const newBookBtn = document.querySelector('.new');
 const dialog = document.querySelector("dialog");
